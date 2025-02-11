@@ -5,8 +5,8 @@ from flask import Flask, request, jsonify
 from telegram import Bot
 
 # ✅ Load environment variables from Railway
-TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
-TELEGRAM_CHANNEL_ID = os.getenv("TELEGRAM_CHANNEL_ID")  # Channel ID (starts with -100)
+TELEGRAM_BOT_TOKEN = os.getenv("BOT_TOKEN")
+TELEGRAM_CHANNEL_ID = os.getenv("CHANNEL_ID")  # Channel ID (starts with -100)
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 # ✅ Set OpenAI API key correctly (Fixed)
