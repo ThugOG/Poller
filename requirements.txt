@@ -1,5 +1,6 @@
-telegram
-python-telegram-bot
 flask
-openai
-anthropic
+openai==1.2.4  # Ensure you are using OpenAI's latest API-compatible version
+python-telegram-bot
+requests
+gunicorn  # Required for stable Railway deployment
+telegram
