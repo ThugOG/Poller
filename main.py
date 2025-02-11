@@ -9,8 +9,8 @@ TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 TELEGRAM_CHANNEL_ID = os.getenv("TELEGRAM_CHANNEL_ID")  # Channel ID (starts with -100)
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
-# ✅ Initialize OpenAI client (NEW API SYNTAX)
-client = openai.Client(api_key=OPENAI_API_KEY)
+# ✅ Set OpenAI API key correctly (Fixed)
+openai.api_key = OPENAI_API_KEY
 
 # ✅ Initialize Flask app
 app = Flask(__name__)
@@ -18,26 +18,21 @@ app = Flask(__name__)
 # ✅ Initialize Telegram bot
 bot = Bot(token=TELEGRAM_BOT_TOKEN)
 
-# ✅ Generate Poll Question Using AI (Updated API)
+# ✅ Generate Poll Question Using AI
 def generate_poll_question(tweet_text):
     prompt = f"""
-    You are a witty and mischievous AI. Generate a Yes/No poll question based on this tweet:
+    You are a witty AI. Generate a Yes/No poll question based on this tweet:
     "{tweet_text}"
     
-    Make the question engaging, spicy, tricky, and funny.
-    
-    Examples:
-    - "Are we seriously okay with {topic}? 🤔"
-    - "Wait… does {topic} actually make sense?"
-    - "If {topic} happens, are we doomed or what?"
+    Make it engaging, spicy, tricky, and funny.
     """
 
-    response = client.chat.completions.create(
+    response = openai.ChatCompletion.create(  # ✅ Fixed API call
         model="gpt-4",
         messages=[{"role": "user", "content": prompt}]
     )
 
-    return response.choices[0].message.content.strip()
+    return response['choices'][0]['message']['content'].strip()
 
 # ✅ Flask Route to Receive Webhook from IFTTT
 @app.route('/new_tweet', methods=['POST'])
