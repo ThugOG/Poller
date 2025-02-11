@@ -10,7 +10,7 @@ TELEGRAM_CHANNEL_ID = os.getenv("TELEGRAM_CHANNEL_ID")  # Channel ID (starts wit
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 # ✅ Initialize OpenAI client (NEW API SYNTAX)
-client = openai.OpenAI(api_key=OPENAI_API_KEY)
+client = openai.Client(api_key=OPENAI_API_KEY)
 
 # ✅ Initialize Flask app
 app = Flask(__name__)
