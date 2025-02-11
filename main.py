@@ -3,6 +3,7 @@ import openai
 import requests
 from flask import Flask, request, jsonify
 from telegram import Bot
+from waitress import serve 
 
 # ✅ Load environment variables from Railway
 TELEGRAM_BOT_TOKEN = os.getenv("BOT_TOKEN")
@@ -66,4 +67,4 @@ def new_tweet():
 # ✅ Run Flask on Railway
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))  # Use Railway’s assigned port
-    app.run(host="0.0.0.0", port=port)
+    serve(app, host="0.0.0.0", port=port)
